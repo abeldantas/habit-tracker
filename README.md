@@ -1,11 +1,11 @@
 # Printable Habit Tracker Calendar
 
-![Habit Tracker Preview](./preview.gif)
+A habit tracker calendar printout for tracking health and fitness habits.
+It's meant to be printed and filled in by hand.
 
 Print yours today here: https://abeldantas.github.io/habit-tracker
 
-A habit tracker calendar printout for tracking health and fitness habits.
-It's meant to be printed and filled in by hand.
+![Habit Tracker Preview](./preview.gif)
 
 - Track daily:
   - Weight
