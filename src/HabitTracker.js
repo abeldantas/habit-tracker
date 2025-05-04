@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 
 const HabitTracker = () => {
+  // Get current date for "Jump to Today" functionality
+  const today = new Date();
+  
   // State for current month and year
-  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [currentMonth, setCurrentMonth] = useState(today.getMonth());
+  const [currentYear, setCurrentYear] = useState(today.getFullYear());
 
   // Names of months and days
   const monthNames = [
@@ -11,6 +14,9 @@ const HabitTracker = () => {
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
   const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+  // Check if current view is today's month/year
+  const isCurrentMonthAndYear = currentMonth === today.getMonth() && currentYear === today.getFullYear();
 
   // Navigation functions
   const goToPreviousMonth = () => {
@@ -29,6 +35,11 @@ const HabitTracker = () => {
     } else {
       setCurrentMonth(currentMonth + 1);
     }
+  };
+
+  const goToToday = () => {
+    setCurrentMonth(today.getMonth());
+    setCurrentYear(today.getFullYear());
   };
 
   // Function to get number of days in a month
@@ -109,18 +120,28 @@ const HabitTracker = () => {
   return (
     <div className="flex flex-col p-4 max-w-4xl mx-auto">
       {/* Header with navigation */}
-      <div className="text-center mb-4">
+      <div className="text-center mb-4 print-header">
         <div className="flex justify-between items-center mb-2">
           <button 
             onClick={goToPreviousMonth}
-            className="bg-gray-200 px-4 py-1 rounded hover:bg-gray-300 transition-colors"
+            className="bg-gray-200 px-4 py-1 rounded hover:bg-gray-300 transition-colors no-print"
           >
             ←
           </button>
-          <h1 className="text-2xl font-bold">{monthNames[currentMonth].toUpperCase()} {currentYear}</h1>
+          <div className="flex items-center justify-center w-full">
+            <h1 className="text-2xl font-bold">{monthNames[currentMonth].toUpperCase()} {currentYear}</h1>
+            {!isCurrentMonthAndYear && (
+              <button 
+                onClick={goToToday}
+                className="ml-2 bg-blue-100 px-2 py-1 text-xs rounded hover:bg-blue-200 transition-colors no-print"
+              >
+                Today
+              </button>
+            )}
+          </div>
           <button 
             onClick={goToNextMonth}
-            className="bg-gray-200 px-4 py-1 rounded hover:bg-gray-300 transition-colors"
+            className="bg-gray-200 px-4 py-1 rounded hover:bg-gray-300 transition-colors no-print"
           >
             →
           </button>
@@ -186,8 +207,8 @@ const HabitTracker = () => {
         ))}
       </div>
       
-      {/* Simple Year Selector */}
-      <div className="flex justify-center my-3">
+      {/* Simple Year/Month Selector - Hide when printing */}
+      <div className="flex justify-center my-3 no-print">
         <div className="flex items-center">
           <label htmlFor="yearSelect" className="mr-2">Year:</label>
           <select 
@@ -216,8 +237,20 @@ const HabitTracker = () => {
         </div>
       </div>
       
-      {/* Legend and Examples */}
-      <div className="bg-gray-100 p-3 my-4 text-sm">
+      {/* Legend - Only show when printing */}
+      <div className="bg-gray-100 p-3 my-4 text-sm print-only">
+        <div className="font-bold mb-2">Legend:</div>
+        <div className="flex flex-wrap gap-6 mb-3">
+          <div><strong>W</strong>: Weight</div>
+          <div><strong>F</strong>: Fat %</div>
+          <div><strong>E</strong>: Exercise ☐</div>
+          <div><strong>R</strong>: Rest ☐</div>
+          <div><strong>C</strong>: Calories Tracked ☐</div>
+        </div>
+      </div>
+      
+      {/* Example and Documentation - Hide when printing */}
+      <div className="bg-gray-100 p-3 my-4 text-sm no-print">
         <div className="font-bold mb-2">Legend:</div>
         <div className="flex flex-wrap gap-6 mb-3">
           <div><strong>W</strong>: Weight</div>
@@ -249,17 +282,16 @@ const HabitTracker = () => {
             <p className="mb-1"><strong>Calories:</strong> Mark with ✓ if you tracked your calories that day</p>
           </div>
         </div>
+        
+        <div className="text-xs mt-4 text-gray-600">
+          <p>Print this page and track your daily habits. Fill in your weight and body fat percentage in their respective fields. For exercise, rest, and calorie tracking, mark a checkmark (✓) when completed or an X when not completed/skipped.</p>
+        </div>
       </div>
       
       {/* Notes section */}
-      <div className="border border-gray-300 p-2">
+      <div className="border border-gray-300 p-2 print-notes mt-4">
         <div className="font-bold text-sm mb-1">Notes:</div>
         <div className="border-t border-gray-300 pt-1 h-20"></div>
-      </div>
-      
-      {/* Print instructions */}
-      <div className="mt-4 text-xs text-gray-600">
-        <p>Print this page and track your daily habits. Fill in your weight and body fat percentage in their respective fields. For exercise, rest, and calorie tracking, mark a checkmark (✓) when completed or an X when not completed/skipped.</p>
       </div>
     </div>
   );

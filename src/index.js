@@ -19,12 +19,40 @@ body {
   .print-wrapper {
     width: 100%;
     max-width: none;
+    padding-top: 1.5rem !important;
   }
   
-  /* Hide navigation controls when printing */
+  /* Hide elements with no-print class when printing */
   .no-print {
     display: none !important;
   }
+  
+  /* Only show elements with print-only class when printing */
+  .print-only {
+    display: block !important;
+  }
+  
+  /* Center title in print view */
+  .print-header {
+    text-align: center !important;
+    margin-top: 2rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .print-header h1 {
+    width: 100% !important;
+    text-align: center !important;
+  }
+  
+  /* Add margin above notes in print view */
+  .print-notes {
+    margin-top: 2rem !important;
+  }
+}
+
+/* Hide print-only elements when not printing */
+.print-only {
+  display: none !important;
 }
 `;
 
