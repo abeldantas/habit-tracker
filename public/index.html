@@ -3,8 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Habit Tracker - May 2025</title>
+  <title>Habit Tracker</title>
+  <link rel="icon" href="%PUBLIC_URL%/favicon.svg" type="image/svg+xml">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Hide browser elements when printing */
+    @media print {
+      @page {
+        margin: 0.5cm;
+        size: auto;
+      }
+      
+      body {
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      
+      /* Hide all browser headers, footers, URLs */
+      html {
+        height: 100%;
+      }
+      
+      /* Hide print-only elements when not printing */
+      .print-only {
+        display: none !important;
+      }
+    }
+    
+    /* Print-specific styles */
+    @media print {
+      /* Hide elements with no-print class when printing */
+      .no-print {
+        display: none !important;
+      }
+      
+      /* Only show elements with print-only class when printing */
+      .print-only {
+        display: block !important;
+      }
+    }
+  </style>
+  <!-- Start Single Page Apps for GitHub Pages -->
+  <script type="text/javascript">
+    // Single Page Apps for GitHub Pages
+    // MIT License
+    // https://github.com/rafgraph/spa-github-pages
+    // This script checks to see if a redirect is present in the query string,
+    // converts it back into the correct url and adds it to the
+    // browser's history using window.history.replaceState(...),
+    // which won't cause the browser to attempt to load the new url.
+    // When the single page app is loaded further down in this file,
+    // the correct url will be waiting in the browser's history for
+    // the single page app to route accordingly.
+    (function(l) {
+      if (l.search[1] === '/' ) {
+        var decoded = l.search.slice(1).split('&').map(function(s) { 
+          return s.replace(/~and~/g, '&')
+        }).join('?');
+        window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+        );
+      }
+    }(window.location))
+  </script>
+  <!-- End Single Page Apps for GitHub Pages -->
 </head>
 <body>
   <div id="root"></div>
