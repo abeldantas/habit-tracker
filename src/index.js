@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MayHabitTracker from './may2025';
+import HabitTracker from './HabitTracker';
 
 // Basic CSS could be added here or in a separate file
 const styles = `
@@ -20,6 +20,11 @@ body {
     width: 100%;
     max-width: none;
   }
+  
+  /* Hide navigation controls when printing */
+  .no-print {
+    display: none !important;
+  }
 }
 `;
 
@@ -27,13 +32,12 @@ const App = () => {
   return (
     <div className="print-wrapper">
       <style>{styles}</style>
-      <MayHabitTracker />
+      <HabitTracker />
     </div>
   );
 };
 
 // Mount the App to your DOM
-// This is for React 17+, modify accordingly for your React version
 ReactDOM.render(
   <React.StrictMode>
     <App />
