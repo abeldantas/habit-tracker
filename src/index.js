@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import HabitTracker from './HabitTracker';
+import VisitCounter from './VisitCounter';
 
 // Basic CSS could be added here or in a separate file
 const styles = `
@@ -61,6 +62,7 @@ const App = () => {
     <div className="print-wrapper">
       <style>{styles}</style>
       <HabitTracker />
+      <VisitCounter />
     </div>
   );
 };
